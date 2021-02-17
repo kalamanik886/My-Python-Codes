@@ -1,0 +1,679 @@
+--Dictionary—
+
+>>>Basics<<<
+A dictionary is unordered mappings for storing objects. It is a set of key-value pairs, with the requirement that the keys are unique (within one dictionary). 
+
+>> Creating a dictionary:
+
+##Empty Dictionary >>
+
+example1 = {}
+example2 = dict()
+print(example1)
+print(example2)
+
+
+#create dictionaries from arbitrary key and value expressions:
+print({x: x**2 for x in (2, 4, 6)})
+
+#Another example
+example = {x: x*2 for x in range(5)} # dictionary comprehension
+print(example)
+
+#Another example
+
+values = {}
+for x in range(5):
+    values[x] = x*2
+print(values)
+
+
+
+#Create dictionaries using keyword arguments:
+print(dict(Ucchash=1000, Sarkar = 2000, Antu = 3000))
+
+
+# Create a dictionary using a builtin function >>>>>>>>>>>>>>>
+
+example = dict(name = "Ucchash",
+               surname = "Sarkar")
+print(example)
+
+>>Types of Dictionaries:
+Dictionaries are indexed by keys, which can be any immutable type; strings and numbers can always be keys. Tuples can be used as keys if they contain only strings, numbers, or tuples; if a tuple contains any mutable object either directly or indirectly, it cannot be used as a key. We can’t use lists as keys, since lists can be modified in place using index assignments.
+#Keys need to be immutable
+#Strings, Numbers, Booleans, Tuples can be keys
+#Lists cannot be a key
+
+
+
+#Keys has to be unique
+#if keys are not uniques, the last key will work
+
+
+
+
+
+##Example1: (Where keys are strings, Values are numbers) >>
+
+
+people = {"Ucchash" : 100,
+          "Sarkar" : 200,
+          "Antu" : 300,
+          "Kalamanik" : 400}
+print(people)
+
+
+
+##Example4: (Key and Value both are strings)
+
+
+fruit = {"Mango": "Summer fruit",
+         "Appale": "All season gruit",
+         "Tomato": "fruit or vegitable?haha",
+         "Jackfruit" : "Our National Fruit"}
+print(fruit)
+
+#from key-value pair tuple of lists >>>>
+
+people = [("Ucchash", 99),("Sarkar", 88),("Antu", 77),("Kalamanik", 66)]
+dictionary1 = dict(people)
+print(dictionary1)
+
+
+#Example (integer as key, strings as value)>>>>>
+
+numbers = {1:"One",
+           2:"Two",
+           3:"Three",
+           4:"Four"}
+print(numbers)
+
+
+
+#number, string, list, dictionary inside a dictionary >>
+
+example1 = {"Key01" : 123,
+           "Key02" : [1,2,3],
+           "Key03" : "BlaBlaBla",
+           "Key04" : {"K" : 100}}
+print(example1)
+
+
+#Dictionary under a list >>>>>>>>>>>>>>
+
+
+example2 = [{"Key01" : 123,
+           "Key02" : [1,2,3],
+           "Key03" : "BlaBlaBla",
+           "Key04" : {"K" : 100}},
+          {"Key04" : 456,
+           "Key05" : ["Antu", "Ucchash", "Sarkar"],
+           "Key06" : True}]
+
+print(example2)
+
+#Unique key
+
+example3 = {"Key01" : 100,
+              "Key02" : 200,
+              "Key02" : 300}
+print(example3["Key01"]) #Unique key
+print(example3["Key02"])  #Shows the last assigned value 
+
+
+>>>Accessing key-values <<<
+
+#Access the values from a dictionary >>>>>>>>>>>>
+
+fruit = {"Mango": "Summer fruit",
+         "Apple": "All season fruit",
+         "Tomato": "fruit or vegitable?haha",
+         "Jackfruit": "Our National Fruit",
+         "Mango" : "May favourite fruit"}
+print(fruit)
+print("------------------------------------------------")
+
+#Access the values by calling the keys:
+print(fruit["Apple"]) #Unique key , unique value
+print(fruit["Tomato"]) #Unique key, unique value
+print(fruit["Mango"]) #Not a unique key, shows the last assigned value
+
+#Access a value whose presence is uncertain:
+
+#print(fruit["Guava"]) #Shows KeyError
+
+#Error avoiding method:
+
+if "Guava" in fruit:
+    print(fruit["Guava"]) #not available but no error
+
+if "Tomato" in fruit:
+    print(fruit["Tomato"]) #Shows the value
+
+
+#shortcut way
+
+print(fruit.get("Tomato")) #Shows the value
+print(fruit.get("Apple")) #Shows the value
+#setting a default value if desired value is not available:
+print(fruit.get("Mango", "default value")) #Shows the value
+print(fruit.get("Guava", "Not Available")) #Shows the default value
+
+print("------------------------------------------------")
+
+##Print keys/values or both from a dictionary >>>>>>>>>>>>
+
+people = {"Ucchash" : 100,
+          "Sarkar" : 200,
+          "Antu" : 300,
+          "Kalamanik" : 400}
+print(people.keys()) #Keys list
+print(people.values()) #Values list
+print(people.items()) #As a tuple list of key-value pairs
+print("--------------------------------------------------------")
+
+
+
+
+# exercise>>>>>>>>>>>>>>>>>>>>>>>>
+#Enter a key name to access the value,
+#if not available, show a message
+#keep entering unit user says "quit"
+
+fruit = {"Mango": "Summer fruit",
+         "Apple": "All season fruit",
+         "Tomato": "fruit or vegitable?haha",
+         "Jackfruit": "Our National Fruit"}
+print(fruit)
+while True:
+    myinput = input("enter a fruit name: ")
+    if myinput == "quit":
+       break
+    if myinput in fruit:
+        result = fruit.get(myinput)
+        print(result)
+    else:
+        print(f"{myinput} not available")
+
+print("-----------------------------------------------")
+
+
+#Mix dictionaries >>>>>>>>>>>>>>>>>>>
+
+#number, string, list, dictionary inside a dictionary >>
+
+example1 = {"Key01" : 123,
+           "Key02" : [1,2,3],
+           "Key03" : "BlaBlaBla",
+           "Key04" : {"K" : 100}}
+print(example1)
+print(example1["Key01"])
+print(example1["Key02"])
+print(example1["Key02"][2]) #Calling list value inside a key
+print(example1["Key03"])
+print(example1["Key04"])
+print(example1["Key04"]["K"]) #calling the key inside a key
+
+print("--------------------------------------------------------")
+
+
+#Call a list value inside a key of a dictionary and make it uppercase>>>
+example2 = {"Key01" : 123,
+           "Key02" : ["a","b","c"],
+           "Key03" : "BlaBlaBla",
+           "Key04" : {"K" : 100}}
+
+print(example2["Key02"][2].upper())
+print("--------------------------------------------------------")
+
+#Dictionary under a list >>>>>>>>>>>>>>
+
+
+example3 = [{"Key01" : 123,
+           "Key02" : [1,2,3],
+           "Key03" : "BlaBlaBla",
+           "Key04" : {"K" : 100}},
+          {"Key04" : 456,
+           "Key05" : ["Antu", "Ucchash", "Sarkar"],
+           "Key06" : True}]
+
+print(example3)
+
+#WE can access values like this :
+
+print(example3[0]["Key04"]["K"])
+print(example3[1]["Key05"][1])
+
+print("------------------------------------------------")
+
+>>>Basic Functions of a dictionary<<<
+
+#Basic functions of a dictionary >>>>>>>>>
+people = {"Ucchash" : 100,
+          "Sarkar" : 200,
+          "Antu" : 300,
+          "Kalamanik" : 400}
+print(people)
+
+#Adding key-value pairs >>
+people["New name"] = 500
+print(people)
+
+#Existing value gets replaced:
+people["Kalamanik"] = 700
+print(people)
+
+#Updating a key-value pair >>
+
+#Updating an existing pair:
+people.update({"Ucchash": 500})
+print(people)
+
+#If not exists it gets added:
+people.update({"New name2" : 600})
+print(people)
+
+#Deteting a key-value pair >>>
+
+del people["Ucchash"]
+print(people)
+
+#Deleting the whole dictionary >>
+#del people
+print(people) #NameError: name 'people' is not defined
+
+
+#Clear a particular key-value pair and show the value>>>>
+print(people.popitem()) #Randomly pops one key-value pair
+print(people)
+print(people.pop("Ucchash")) #Pops desired key-value pair
+print(people)
+
+
+#Clearing whole dictioanry >>>
+people.clear()
+print(people) #Empty dictionary
+
+
+#Editing a value of a key >>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+example = {"A" : [1,2,3],
+           "B" : [4,5,6],
+           "C" : [7,8,9]}
+print(example)
+example["A"] += [4,5,6] #Augmented operation
+print(example)
+
+>>Other functions<<
+
+#Other functions >>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+#Length of a Dictionary:
+people = {"Ucchash" : 100,
+          "Sarkar" : 200,
+          "Antu" : 300,
+          "Kalamanik" : 400}
+print(len(people))
+print("--------------------------------------------------------")
+#Copy of a dictionary >>>>>>>>>
+
+people1 = {"Ucchash" : 100,
+          "Sarkar" : 200,
+          "Antu" : 300,
+          "Kalamanik" : 400}
+#Method1:
+people2 = people1.copy()
+print(people2)
+#Method2:
+people2 = dict(people1)
+print(people2)
+
+
+
+# #combine two dictionary (update method)>>>>>>>>>>>>>>
+#
+fruit = {"Mango": "Sweet, summer fruit",
+         "Apple" : "Healthy , winter fruit",
+         "Tomato" : "Not a fruit, a vegitable",
+         "jackfruit": "National fruit"}
+print(fruit)
+
+vegetable = {"Potato": "Most common vcegetable",
+             "Carrot" : "Colorful vegetable",
+             "Pumpkin" : "Good for making pie",
+             "Cucumber": "Commonly used for salad"}
+print(vegetable)
+
+vegetable.update(fruit) #combines fruit into vegitable dictionary
+print(vegetable)
+
+fruit.update(vegetable)
+print(fruit) #combines vegetable into fruit dictionary
+
+#Combine two dictionaries
+
+first = dict(x=1, y=2, z=3)
+second = dict(a=5, b=6, c=7)
+
+combined ={**first, **second, 'm':1}
+print(combined) #combines first and second and add an element at the end
+
+
+
+>>sorting a dictionary <<
+#Converting a dictionary into a list to sort it
+
+people = {"Ucchash" : 100,
+          "Sarkar" : 200,
+          "Antu" : 300,
+          "Kalamanik" : 400}
+
+#Sorting the keys only:
+
+people_list = list(people)
+people_list.sort()
+print(people_list)
+
+#Sorting the values only:
+
+people_list = list(people.values())
+people_list.sort()
+print(people_list)
+
+#Sorting both list and values:
+
+people_list = list(people.items())
+people_list.sort()
+print(people_list)
+
+
+fruit = {"Mango": "Summer fruit",
+         "Apple": "All season fruit",
+         "Tomato": "fruit or vegitable?haha",
+         "Jackfruit": "Our National Fruit"}
+
+
+sorted_keys = list(fruit.keys())
+sorted_keys.sort()
+for i in sorted_keys:
+    print(i + ' : ' + fruit[i])
+
+>>unpack
+
+#Unpacking a dictionary>>>>>>
+
+people = {"Ucchash" : 99,
+          "Sarkar" : 88,
+          "Antu" : 77,
+          "Kalamanik" : 66}
+for i in people:
+    print(f"{i} => {people[i]}")
+print("---------------------------------------------")
+
+for i in people.keys():
+    print(i)
+for i in people.values():
+    print(i)
+for i in people.items():
+    print(i)
+for i,j in people.items(): #Tuple unpacking method
+    print(i,j)
+print("---------------------------------------------")
+
+##Loop over dictionary
+
+point1 = {"x": 1, "y": 2}
+
+for i in point1: #only shows the key not the value
+    print(i)
+
+for i in point1:
+    print(i, point1[i]) #shows key and value
+
+for i in point1.items(): #we get tuples
+    print(i)  #key and value both
+
+
+for key, value in point1.items(): #unpacked the tuples
+    print(key, value) #key and value both (i,j)
+
+
+print("----------------------------------------------------")
+
+
+
+>>Existence of key-value<<
+#Look for a item in a dictionary >>>>>>>>>>>>>>>>>>>
+
+dictionary2 = {"Key01" : 100,
+              "Key02" : 200,
+              "Key03" : 300,
+              "Key04" : 400}
+
+print("Key01" in dictionary2) #True
+print("Key10" in dictionary2) #False
+print(100 in dictionary2) #Shows false because it searches for keys, not values
+print(200 in dictionary2) #Shows false because it searches for keys, not values
+print("-----------------------------------------------")
+
+#Look for values or keys only  >>>>
+
+dictionary2 = {"Key01" : 100,
+              "Key02" : 200,
+              "Key03" : 300,
+              "Key04" : 400}
+
+print(dictionary2.keys()) #object of keys
+print(list(dictionary2.keys())) #List of keys
+print(dictionary2.values()) #object of values
+print(list(dictionary2.values()))#List of values
+print(dictionary2.items()) #object of key-value tuples
+print(list(dictionary2.items())) #List of key-value tuples
+
+print("Key01" in dictionary2.keys()) #search only in the keys for an item
+print(200 in dictionary2.values()) #Search only in the values for an item
+print("-----------------------------------------------")
+
+
+>>Exercise<<
+
+#Dictionary comprehension >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#Syntax>>>>
+#{
+# key_expression(item): value_expression(item)
+# for item in iterable
+# }
+
+#Example>>>>>>>
+country_cap = {"Bangladesh" : "Dhaka",
+           "India" : "Delhi",
+           "Pakistan" : "Islamabad",
+           "Nepal" : "Kathmundu",
+           "Bhutan": "Thimpu",
+           }
+print(country_cap)
+#Reverse the key and value >>>>>>>>>>>>>>>
+country_cap = {i : j for j, i in country_cap.items()}
+print(country_cap)
+
+#Example >>>>>>>>>>>>>>>>>>>>>>>>
+#Dictionary of a number with 3 divisors in a tuple >>>>
+#Prime number list >>>>>>>>>>>
+from math import sqrt
+def is_prime(x):
+    if x<2:
+        return False
+    for i in range(2, int(sqrt(x)+1)):
+        if x%i ==0:
+            return False
+    return True
+print([x for x in range(101) if is_prime(x)])
+
+prime_square_divisors = {x*x:(1,x,x*x) for x in range(20) if is_prime(x)}
+print(prime_square_divisors)
+
+
+
+#Exercise >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+from pprint import pprint #preety print module, function
+
+sentence = "This is a common interview question"
+
+frequency = {}
+
+for i in sentence:
+    if i in frequency:
+        frequency[i] += 1
+    else:
+        frequency[i] = 1
+
+print(frequency)
+pprint(frequency, width=1) #good way to print a dictionary
+#convert dictionary into a list of tuples for sorting purposes
+#Lambda Function >>>>>>>>>>>>>>>>>>>>>>>>
+
+frequency_list = sorted(
+    frequency.items(),
+    key=lambda kv: kv[1],
+    reverse = True)
+print(frequency_list)
+result = frequency_list[0]
+print(result)
+
+
+
+
+########  example>>>>>>>>>>>>>>>
+
+# fruit = {"Mango": "Summer fruit",
+#          "Apple": "All season fruit",
+#          "Tomato": "fruit or vegitable?haha",
+#          "Jackfruit": "Our National Fruit"}
+#
+# print(fruit)
+# while True:
+#     myinput = input("enter a fruit name: ")
+#     if myinput == "quit":
+#        break
+#     if myinput in fruit:
+#         result = fruit.get(myinput)
+#         print(result)
+#     else:
+#         print(f"{myinput} not available")
+
+# Print the most repeatable name >>>>>>>
+
+names = ["Ucchash", "Antu", "Sarkar", "Ucchash", "Kalamanik", "Antu", "Ucchash", "Sarkar", "Kalamanik", "Antu",
+         "Sarkar", "Ucchash", "Kalamanik", "Sarkar", "Antu", "Ucchash", "Sarkar", "Ucchash"]
+print(names)
+count_dict = {}
+
+for i in names:
+    if i in count_dict:
+        count_dict[i] += 1
+    else:
+        count_dict[i] = 1
+
+count_dict = sorted(
+    count_dict.items(),
+    key=lambda kv: kv[1],
+    reverse=True)
+print(count_dict)
+result = count_dict[0]
+print(result)
+
+# Another way >>>>>>>>>>>>>>>>>>>>>
+counts = dict()
+names = ['Ucchash', 'Antu', 'Sarkar', 'Ucchash', 'Kalamanik', 'Antu', 'Ucchash', 'Sarkar', 'Kalamanik', 'Antu',
+         'Sarkar', 'Ucchash', 'Kalamanik', 'Sarkar', 'Antu', 'Ucchash', 'Sarkar', 'Ucchash']
+for i in names:
+    counts[i] = counts.get(i, 0) + 1
+print(counts)
+
+
+
+
+
+# Write a program to read through the mbox-short.txt and
+# figure out who has sent the greatest number of mail messages.
+# The program looks for 'From ' lines and
+# takes the second word of those lines as the person who sent the mail.
+# The program creates a Python dictionary that maps the sender's mail address
+# to a count of the number of times they appear in the file. After the dictionary is produced, '
+# the program reads through the dictionary using a maximum loop to find the most prolific committer.
+
+
+name = input("Enter file name: ")
+file = open(name)
+result = {}
+mylist = []
+for i in file:
+    words = i.split()
+    for i in words:
+        if i == "From":
+            x = words[words.index(i)+1]
+            mylist.append(x)
+print(mylist)
+
+for i in mylist:
+    result[i] = result.get(i, 0)+1
+largecount = None
+largeword = None
+for i,j in result.items():
+    if largecount is None or j>largecount:
+        largeword = i
+        largecount = j
+print(f"{largeword} = {largecount} times")
+
+#Count all the words in a txt file:
+
+name = input("Enter file name: ")
+file = open(name)
+
+result = {}
+for i in file:
+    words = i.split()
+    for i in words:
+        result[i] = result.get(i, 0)+1
+largecount = None
+largeword = None
+for i,j in result.items():
+    if largecount is None or j>largecount:
+        largeword = i
+        largecount = j
+print(f"{largeword} = {largecount} times")
+#Write a program to read through the mbox-short.txt and 
+# figure out the distribution by hour of the day for each of the messages. 
+# You can pull the hour out from the 'From ' line by finding the time and 
+# then splitting the string a second time using a colon.
+#From stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008
+#Once you have accumulated the counts for each hour, print out the counts
+
+
+
+# name = input("Enter file name: ")
+file = open("mbox-short.txt")
+result = {}
+mylist = []
+for i in file:
+    words = i.split()
+    for i in words:
+        if i == "From":
+            x = words[words.index(i)-2]
+            y = x[0:2]
+            mylist.append(y)
+#print(mylist)
+
+for i in mylist:
+    result[i] = result.get(i, 0)+1
+largecount = None
+largeword = None
+for i,j in sorted(result.items()):
+    print(i,j)
+#     if largecount is None or j>largecount:
+#         largeword = i
+#         largecount = j
+# print(f"{largeword} = {largecount} times")
+
